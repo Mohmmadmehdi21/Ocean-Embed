@@ -1,0 +1,88 @@
+name: oceanembed
+description: "AI-Powered Ocean Intelligence Platform"
+publish_to: 'none'
+
+version: 1.0.0+1
+
+environment:
+  sdk: ^3.13.1
+
+dependencies:
+  flutter:
+    sdk: flutter
+
+  # iOS-style icons
+  cupertino_icons: ^1.0.8
+
+  # ------------------------------------------------------------
+  # MAP
+  # ------------------------------------------------------------
+
+  # Google Maps
+  google_maps_flutter: ^2.13.1
+
+  # Interactive map
+  flutter_map: ^7.0.2
+
+  # Latitude / Longitude support
+  latlong2: ^0.9.1
+
+  # ------------------------------------------------------------
+  # UI / NAVIGATION
+  # ------------------------------------------------------------
+
+  # Charts and graphs
+  fl_chart: ^0.69.0
+
+  # Application routing
+  go_router: ^14.6.2
+
+  # Date / number formatting
+  intl: ^0.19.0
+
+  # Network image caching
+  cached_network_image: ^3.4.1
+
+  # ------------------------------------------------------------
+  # NETWORK / API
+  # ------------------------------------------------------------
+
+  # HTTP requests for Copernicus Marine GetFeatureInfo
+  http: ^1.2.2
+
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+
+  # Recommended Flutter lint rules
+  flutter_lints: ^6.0.0
+
+flutter:
+  uses-material-design: true
+
+  # ------------------------------------------------------------
+  # ASSETS
+  # ------------------------------------------------------------
+  #
+  # Uncomment when assets are added:
+  #
+  # assets:
+  #   - assets/images/
+  #   - assets/icons/
+
+  # ------------------------------------------------------------
+  # FONTS
+  # ------------------------------------------------------------
+  #
+  # Example Inter font configuration:
+  #
+  # fonts:
+  #   - family: Inter
+  #     fonts:
+  #       - asset: assets/fonts/Inter-Regular.ttf
+  #       - asset: assets/fonts/Inter-Medium.ttf
+  #         weight: 500
+  #       - asset: assets/fonts/Inter-SemiBold.ttf
+  #         weight: 600
+  #       - asset: assets/fonts/Inter-Bold.ttf
+  #         weight: 700
