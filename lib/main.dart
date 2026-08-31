@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'dashboard_screen.dart';
+import 'screens/splash_screen.dart';
 
 void main() {
   runApp(const OceanEmbedApp());
@@ -12,7 +12,7 @@ class OceanEmbedApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
-      title: 'OceanEmbed',
+      title: 'OceanEmbed - AI Ocean Intelligence',
       theme: ThemeData(
         useMaterial3: true,
         fontFamily: 'Inter',
@@ -22,7 +22,7 @@ class OceanEmbedApp extends StatelessWidget {
           brightness: Brightness.light,
         ),
       ),
-      home: const DashboardScreen(),
+      home: const OceanEmbedSplashScreen(),
     );
   }
 }
