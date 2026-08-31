@@ -8,6 +8,209 @@ class OceanEngine {
   static final OceanEngine instance = OceanEngine._();
   OceanEngine._();
 
+  /// Standard land polygons for major landmasses surrounding the Indian & Global Oceans
+  static const List<List<List<double>>> _landPolygons = [
+    // 1. Indian Subcontinent
+    [
+      [8.08, 77.55],
+      [8.8, 76.5],
+      [10.0, 76.0],
+      [12.0, 75.0],
+      [14.5, 74.3],
+      [15.5, 73.8],
+      [17.0, 73.3],
+      [19.0, 72.8],
+      [20.0, 72.8],
+      [21.0, 72.8],
+      [21.7, 72.3],
+      [20.8, 70.8],
+      [20.7, 69.5],
+      [22.3, 68.9],
+      [23.0, 68.5],
+      [23.8, 68.2],
+      [24.5, 67.8],
+      [25.0, 66.8],
+      [28.0, 66.0],
+      [31.0, 70.0],
+      [35.0, 74.0],
+      [36.0, 77.0],
+      [32.0, 80.0],
+      [30.0, 82.0],
+      [28.0, 85.0],
+      [27.5, 89.0],
+      [28.0, 93.0],
+      [28.5, 96.5],
+      [26.0, 95.0],
+      [24.0, 92.5],
+      [23.0, 91.5],
+      [21.8, 91.8],
+      [21.8, 89.5],
+      [21.6, 87.5],
+      [20.0, 86.5],
+      [18.0, 84.0],
+      [16.0, 81.5],
+      [14.0, 80.2],
+      [13.0, 80.3],
+      [10.5, 79.8],
+      [9.2, 79.2],
+      [8.5, 77.8],
+    ],
+    // 2. Sri Lanka
+    [
+      [5.9, 80.5],
+      [6.0, 81.8],
+      [7.0, 81.9],
+      [8.5, 81.3],
+      [9.8, 80.2],
+      [9.0, 79.8],
+      [7.5, 79.8],
+      [6.5, 80.0],
+    ],
+    // 3. Arabian Peninsula & Middle East
+    [
+      [12.8, 45.0],
+      [14.5, 49.0],
+      [17.0, 54.0],
+      [20.0, 58.0],
+      [22.5, 59.8],
+      [24.0, 57.5],
+      [26.0, 56.5],
+      [24.0, 53.0],
+      [25.0, 51.5],
+      [27.0, 50.0],
+      [30.0, 48.0],
+      [35.0, 45.0],
+      [38.0, 40.0],
+      [36.0, 36.0],
+      [28.0, 34.5],
+      [22.0, 38.5],
+      [16.0, 42.5],
+      [12.8, 43.5],
+    ],
+    // 4. Iran / Pakistan Makran Coast Interior
+    [
+      [25.3, 57.0],
+      [25.2, 61.5],
+      [25.1, 66.5],
+      [28.0, 67.0],
+      [38.0, 60.0],
+      [38.0, 50.0],
+      [32.0, 50.0],
+      [28.0, 52.0],
+      [26.5, 55.0],
+    ],
+    // 5. Horn of Africa & East Africa
+    [
+      [11.8, 43.0],
+      [11.8, 51.2],
+      [10.0, 51.2],
+      [5.0, 48.5],
+      [2.0, 45.5],
+      [0.0, 42.5],
+      [-4.0, 39.5],
+      [-10.0, 40.5],
+      [-15.0, 40.5],
+      [-25.0, 33.0],
+      [-35.0, 20.0],
+      [-35.0, 10.0],
+      [15.0, 10.0],
+      [20.0, 37.0],
+      [13.0, 43.0],
+    ],
+    // 6. Madagascar
+    [
+      [-12.0, 49.3],
+      [-16.0, 49.8],
+      [-25.5, 47.0],
+      [-25.0, 44.5],
+      [-18.0, 44.0],
+      [-13.0, 48.5],
+    ],
+    // 7. Indochina, Myanmar, Thailand, Malay Peninsula
+    [
+      [21.5, 92.5],
+      [20.0, 94.0],
+      [16.0, 94.5],
+      [15.5, 97.5],
+      [10.0, 98.5],
+      [6.0, 100.0],
+      [1.3, 103.8],
+      [4.0, 103.5],
+      [7.0, 101.5],
+      [13.0, 100.5],
+      [13.5, 101.0],
+      [22.0, 108.0],
+      [28.0, 100.0],
+      [24.0, 94.0],
+    ],
+    // 8. Sumatra
+    [
+      [5.8, 95.3],
+      [3.0, 99.0],
+      [-0.5, 104.0],
+      [-5.5, 106.0],
+      [-5.0, 103.5],
+      [-2.0, 100.5],
+      [2.0, 96.5],
+    ],
+    // 9. Australia
+    [
+      [-11.0, 142.0],
+      [-20.0, 148.0],
+      [-30.0, 153.0],
+      [-38.0, 148.0],
+      [-38.0, 140.0],
+      [-35.0, 117.0],
+      [-22.0, 113.5],
+      [-15.0, 125.0],
+      [-12.0, 131.0],
+      [-11.0, 136.0],
+    ],
+  ];
+
+  /// Check whether a given coordinate is located on Land
+  bool isLand(double lat, double lon) {
+    // Deep continental Eurasian landmass north of Indian Ocean
+    if (lat >= 30.0 && lon >= 35.0 && lon <= 105.0) {
+      // Allow Red Sea and Persian Gulf marine exceptions
+      final inPersianGulf = lat <= 30.0 && lon >= 48.0 && lon <= 56.0;
+      if (!inPersianGulf) return true;
+    }
+
+    // Inland Africa
+    if (lon <= 35.0 && lat >= 0.0 && lat <= 30.0) {
+      return true;
+    }
+
+    // Test against detailed regional land polygons
+    for (final poly in _landPolygons) {
+      if (_isPointInPolygon(lat, lon, poly)) {
+        return true;
+      }
+    }
+    return false;
+  }
+
+  /// Check whether a given coordinate is an Ocean coordinate
+  bool isOcean(double lat, double lon) {
+    return !isLand(lat, lon);
+  }
+
+  /// Ray-casting point-in-polygon test
+  bool _isPointInPolygon(double lat, double lon, List<List<double>> polygon) {
+    bool inside = false;
+    int j = polygon.length - 1;
+    for (int i = 0; i < polygon.length; i++) {
+      final yi = polygon[i][0], xi = polygon[i][1];
+      final yj = polygon[j][0], xj = polygon[j][1];
+      final intersect = ((yi > lat) != (yj > lat)) &&
+          (lon < (xj - xi) * (lat - yi) / (yj - yi) + xi);
+      if (intersect) inside = !inside;
+      j = i;
+    }
+    return inside;
+  }
+
   /// Determine region name from coordinates
   String getRegionName(double lat, double lon) {
     if (lon > 78.0 && lon <= 100.0 && lat >= 5.0 && lat <= 25.0) {

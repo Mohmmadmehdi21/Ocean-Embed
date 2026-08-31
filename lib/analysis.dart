@@ -384,15 +384,17 @@ class _AnalysisScreenState extends State<AnalysisScreen> {
         children: [
           Row(
             children: [
-              const Text(
-                'Surface Satellite Input Variables (0.25°)',
-                style: TextStyle(
-                  fontSize: 13,
-                  fontWeight: FontWeight.w800,
-                  color: Color(0xFF132238),
+              const Expanded(
+                child: Text(
+                  'Surface Satellite Input Variables (0.25°)',
+                  style: TextStyle(
+                    fontSize: 13,
+                    fontWeight: FontWeight.w800,
+                    color: Color(0xFF132238),
+                  ),
                 ),
               ),
-              const Spacer(),
+              const SizedBox(width: 8),
               Container(
                 padding: const EdgeInsets.symmetric(horizontal: 7, vertical: 3),
                 decoration: BoxDecoration(
@@ -438,7 +440,7 @@ class _AnalysisScreenState extends State<AnalysisScreen> {
               Expanded(
                 child: _parameterTile(
                   'Sea Surface Height (SLA)',
-                  '${s.ssh > 0 ? "+" : ""}${s.ssh} m',
+                  '${s.ssh > 0 ? "+" : ""}${s.ssh.toStringAsFixed(2)} m',
                   Icons.waves_rounded,
                   const Color(0xFF9333EA),
                 ),
@@ -447,7 +449,7 @@ class _AnalysisScreenState extends State<AnalysisScreen> {
               Expanded(
                 child: _parameterTile(
                   'Surface Current (U, V)',
-                  '${s.currentU}, ${s.currentV} m/s',
+                  '${s.currentU.toStringAsFixed(2)}, ${s.currentV.toStringAsFixed(2)} m/s',
                   Icons.compare_arrows_rounded,
                   const Color(0xFF18B77A),
                 ),
@@ -535,15 +537,17 @@ class _AnalysisScreenState extends State<AnalysisScreen> {
         children: [
           Row(
             children: [
-              const Text(
-                'Reconstruction at Selected Depth',
-                style: TextStyle(
-                  fontSize: 13,
-                  fontWeight: FontWeight.w800,
-                  color: Color(0xFF132238),
+              const Expanded(
+                child: Text(
+                  'Reconstruction at Selected Depth',
+                  style: TextStyle(
+                    fontSize: 13,
+                    fontWeight: FontWeight.w800,
+                    color: Color(0xFF132238),
+                  ),
                 ),
               ),
-              const Spacer(),
+              const SizedBox(width: 8),
               Container(
                 padding: const EdgeInsets.symmetric(horizontal: 7, vertical: 3),
                 decoration: BoxDecoration(
@@ -796,15 +800,17 @@ class _AnalysisScreenState extends State<AnalysisScreen> {
             ),
           ),
           const SizedBox(height: 12),
-          const Row(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              _LegendBadge(color: Color(0xFF147BEF), label: 'OceanEmbed AI'),
-              SizedBox(width: 14),
-              _LegendBadge(color: Color(0xFF18B77A), label: 'ARGO In-Situ'),
-              SizedBox(width: 14),
-              _LegendBadge(color: Color(0xFF9333EA), label: 'GLORYS Reanalysis'),
-            ],
+          const Center(
+            child: Wrap(
+              alignment: WrapAlignment.center,
+              spacing: 14,
+              runSpacing: 6,
+              children: [
+                _LegendBadge(color: Color(0xFF147BEF), label: 'OceanEmbed AI'),
+                _LegendBadge(color: Color(0xFF18B77A), label: 'ARGO In-Situ'),
+                _LegendBadge(color: Color(0xFF9333EA), label: 'GLORYS Reanalysis'),
+              ],
+            ),
           ),
         ],
       ),
@@ -818,15 +824,17 @@ class _AnalysisScreenState extends State<AnalysisScreen> {
         children: [
           Row(
             children: [
-              const Text(
-                'Standard Depth Reconstruction Table',
-                style: TextStyle(
-                  fontSize: 13,
-                  fontWeight: FontWeight.w800,
-                  color: Color(0xFF132238),
+              const Expanded(
+                child: Text(
+                  'Standard Depth Reconstruction Table',
+                  style: TextStyle(
+                    fontSize: 13,
+                    fontWeight: FontWeight.w800,
+                    color: Color(0xFF132238),
+                  ),
                 ),
               ),
-              const Spacer(),
+              const SizedBox(width: 8),
               Container(
                 padding: const EdgeInsets.symmetric(horizontal: 7, vertical: 3),
                 decoration: BoxDecoration(
@@ -979,15 +987,17 @@ class _AnalysisScreenState extends State<AnalysisScreen> {
         children: [
           Row(
             children: [
-              const Text(
-                'Satellite Latent Embedding Engine',
-                style: TextStyle(
-                  fontSize: 13,
-                  fontWeight: FontWeight.w800,
-                  color: Color(0xFF132238),
+              const Expanded(
+                child: Text(
+                  'Satellite Latent Embedding Engine',
+                  style: TextStyle(
+                    fontSize: 13,
+                    fontWeight: FontWeight.w800,
+                    color: Color(0xFF132238),
+                  ),
                 ),
               ),
-              const Spacer(),
+              const SizedBox(width: 8),
               Container(
                 padding: const EdgeInsets.symmetric(horizontal: 7, vertical: 3),
                 decoration: BoxDecoration(
@@ -1022,9 +1032,11 @@ class _AnalysisScreenState extends State<AnalysisScreen> {
               child: Row(
                 children: [
                   SizedBox(
-                    width: 140,
+                    width: 110,
                     child: Text(
                       e.key,
+                      maxLines: 1,
+                      overflow: TextOverflow.ellipsis,
                       style: const TextStyle(fontSize: 8.5, color: Color(0xFF718096)),
                     ),
                   ),
