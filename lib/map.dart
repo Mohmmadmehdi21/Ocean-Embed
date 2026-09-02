@@ -200,19 +200,12 @@ class _OceanMapScreenState extends State<OceanMapScreen> {
                 onTap: (tapPosition, point) => _onMapTap(point),
               ),
               children: [
-                // ----------------------------------------------------
-                // 1. BASEMAP LAYER (Copernicus Dark Abyss / GEBCO Bathymetry)
-                // ----------------------------------------------------
                 TileLayer(
                   urlTemplate: currentBasemap['url']!,
                   userAgentPackageName: 'com.oceanembed.app',
                   maxZoom: 12,
                   tileProvider: NetworkTileProvider(),
                 ),
-
-                // ----------------------------------------------------
-                // 2. COPERNICUS MARINE WMTS SCIENTIFIC DATA LAYER
-                // ----------------------------------------------------
                 if (activeConfig != null)
                   Opacity(
                     opacity: _layerOpacity,
@@ -229,9 +222,6 @@ class _OceanMapScreenState extends State<OceanMapScreen> {
                     ),
                   ),
 
-                // ----------------------------------------------------
-                // 3. GEBCO BATHYMETRY LABELS & DEPTH CONTOURS
-                // ----------------------------------------------------
                 if (_showBathymetryLabels)
                   TileLayer(
                     urlTemplate: CopernicusMarineService.bathymetryReferenceUrl,
@@ -240,9 +230,6 @@ class _OceanMapScreenState extends State<OceanMapScreen> {
                     tileProvider: NetworkTileProvider(),
                   ),
 
-                // ----------------------------------------------------
-                // 4. AI THERMAL & WATER MASS SIMULATION LAYER
-                // ----------------------------------------------------
                 if (_showAiThermalSim)
                   PolygonLayer(
                     polygons: [
@@ -409,9 +396,6 @@ class _OceanMapScreenState extends State<OceanMapScreen> {
                 child: _buildFeatureCard(),
               ),
 
-            // ======================================================
-            // BOTTOM CONTROL PANEL (DEPTH SLIDER, DATE, & LEGEND)
-            // ======================================================
             Positioned(
               left: 14,
               right: 14,
@@ -1161,7 +1145,6 @@ class _OceanMapScreenState extends State<OceanMapScreen> {
             onChanged: _onDepthChanged,
           ),
 
-          // Observation Date selector
           Row(
             children: [
               const Icon(Icons.calendar_month_rounded,
